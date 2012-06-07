@@ -25,13 +25,39 @@ app.configure(function() {
   app.use(express.errorHandler({showStack: true}));
 });
 
+// attach socket.io server to app
+io = io.listen(app);
+
+io.configure(function() {
+  io.set('log level', '1');
+});
+
+io.on('connection', on_new_connection);
+
 app.listen(3000, function() {
   console.log('UserSpy server started.');
 });
 
 function router(app) {
-  app.get('/hello', function(req, res) {
-    res.write('Hello, ' + req.query['name'] + '!');
-    res.end();
+  app.get('/api/visitors', function(req, res) {
+    // TODO
+  });
+}
+
+function on_new_connection(socket) {
+  socket.on('page info', function(info) {
+    // TODO
+  });
+  
+  socket.on('events', function(events) {
+    // TODO
+  });
+  
+  socket.on('spy', function(spy_params) {
+    // TODO
+  });
+  
+  socket.on('disconnect', function() {
+    // TODO
   });
 }
