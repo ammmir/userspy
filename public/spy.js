@@ -64,7 +64,7 @@
         
         for(socket_id in visitors) {
           $('form select').append(
-            $('<option>').attr('value', socket_id).text(visitors[socket_id].address.address)
+            $('<option>').attr('value', socket_id).text(socket_id)
           );
         }
         
