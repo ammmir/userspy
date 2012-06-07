@@ -54,6 +54,7 @@ function router(app) {
 
 var VISITORS = {}; // url -> socket.id -> { page info ... }
 var SOCKET_URL = {}; // socket.id -> url
+var SPY_PARAMS = {}; // socket.id -> spy_params
 
 function on_connection(socket) {
   socket.on('page info', function(info) {
@@ -78,6 +79,14 @@ function on_connection(socket) {
     
     if(!current_users[spy_params.socket_id])
       return socket.emit('error', 'no such socket_id connected');
+    
+    var old_spy_params = SPY_PARAMS[socket.id];
+    
+    if(old_spy_params) {
+      socket.leave(old_spy_params.url + '#' + old_spy_params.socket_id);
+    }
+    
+    SPY_PARAMS[socket.id] = spy_params;
     
     var page_info = VISITORS[spy_params.url][spy_params.socket_id];
     
