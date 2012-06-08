@@ -38,6 +38,10 @@ app.listen(3000, function() {
   console.log('UserSpy server started.');
 });
 
+var VISITORS = {}; // url -> socket.id -> { page info ... }
+var SOCKET_URL = {}; // socket.id -> url
+var SPY_PARAMS = {}; // socket.id -> spy_params
+
 function router(app) {
   app.get('/api/visitors', function(req, res) {
     // TODO
