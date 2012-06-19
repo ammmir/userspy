@@ -42,7 +42,7 @@ function router(app) {
   app.get('/api/visitors', function(req, res) {
     var page_url = req.query['url'];
 
-    res.json(VISITORS[page_url]);
+    res.json(VISITORS[page_url] || {});
     res.end();
   });
 }
